@@ -6,9 +6,11 @@ ARCH="x86_64"
 
 # Path to Xen project source code
 XEN_DIR="/path/to/xen/project/xen/"
+# Path to bindgen binary
+BINDGEN="/path/to/bindgen/"
 
 if [ "$ARCH" = "x86_64" ]; then
-	bindgen wrapper_x86_64.h -o src/xen_bindings_x86_64.rs \
+	${BINDGEN}/bindgen wrapper_x86_64.h -o src/xen_bindings_x86_64.rs \
 	--ignore-functions \
 	--ignore-methods \
 	--no-layout-tests \
@@ -30,7 +32,7 @@ if [ "$ARCH" = "x86_64" ]; then
 	-I${XEN_DIR}/xen/include/xen/ \
 	-I${XEN_DIR}/xen/include/public/
 elif [ "$ARCH" = "aarch64" ]; then
-	bindgen wrapper_aarch64.h -o src/xen_bindings_aarch64.rs \
+	${BINDGEN}/bindgen wrapper_aarch64.h -o src/xen_bindings_aarch64.rs \
 	--ignore-functions \
 	--ignore-methods \
 	--no-layout-tests \
