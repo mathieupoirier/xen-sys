@@ -5,7 +5,8 @@ ARCH="x86_64"
 #ARCH="aarch64"
 
 # Path to Xen project source code
-XEN_DIR="/path/to/xen/project/xen/"
+XEN_DIR_X86="/path/to/xen/project/xen/x86"
+XEN_DIR_ARCH64="/path/to/xen/project/xen/aarch64"
 # Path to bindgen binary
 BINDGEN="/path/to/bindgen/"
 
@@ -26,11 +27,11 @@ if [ "$ARCH" = "x86_64" ]; then
 	-D__nonnull\(...\)=" " \
 	-D__wur=" " \
 	-D__gnuc_va_list="void *" \
-	-I${XEN_DIR}/tools/include/ \
-	-I${XEN_DIR}/xen/arch/x86/include/ \
-	-I${XEN_DIR}/xen/include/ \
-	-I${XEN_DIR}/xen/include/xen/ \
-	-I${XEN_DIR}/xen/include/public/
+	-I${XEN_DIR_X86}/tools/include/ \
+	-I${XEN_DIR_X86}/xen/arch/x86/include/ \
+	-I${XEN_DIR_X86}/xen/include/ \
+	-I${XEN_DIR_X86}/xen/include/xen/ \
+	-I${XEN_DIR_X86}/xen/include/public/
 elif [ "$ARCH" = "aarch64" ]; then
 	${BINDGEN}/bindgen wrapper_aarch64.h -o src/xen_bindings_aarch64.rs \
 	--ignore-functions \
@@ -54,9 +55,9 @@ elif [ "$ARCH" = "aarch64" ]; then
 	-D__nonnull\(...\)=" " \
 	-D__wur=" " \
 	-D__gnuc_va_list="void *" \
-	-I${XEN_DIR}/tools/include/ \
-	-I${XEN_DIR}/xen/arch/arm/include/ \
-	-I${XEN_DIR}/xen/include/ \
-	-I${XEN_DIR}/xen/include/xen/ \
-	-I${XEN_DIR}/xen/include/public/
+	-I${XEN_DIR_ARCH64}/tools/include/ \
+	-I${XEN_DIR_ARCH64}/xen/arch/arm/include/ \
+	-I${XEN_DIR_ARCH64}/xen/include/ \
+	-I${XEN_DIR_ARCH64}/xen/include/xen/ \
+	-I${XEN_DIR_ARCH64}/xen/include/public/
 fi
