@@ -25,10 +25,15 @@ pub const XEN_DOMCTL_INTERFACE_VERSION: u32 = 0x16;
     not(any(
         feature = "xen_domctl_interface_version_0x15",
         feature = "xen_domctl_interface_version_0x16",
-        feature = "xen_domctl_interface_version_0x17"
+        feature = "xen_domctl_interface_version_0x17",
+        feature = "xen_domctl_interface_version_0x18"
     ))
 ))]
 pub const XEN_DOMCTL_INTERFACE_VERSION: u32 = 0x17;
+// Xen 4.22. struct xen_domctl_getdomaininfo keeps its 0x17 layout; the arm
+// xen_arch_domainconfig only gains trailing fields (arm_sci_type, v8r_el1_msa).
+#[cfg(feature = "xen_domctl_interface_version_0x18")]
+pub const XEN_DOMCTL_INTERFACE_VERSION: u32 = 0x18;
 
 pub const XEN_DOMINF_dying: u32 = 0b1;
 pub const XEN_DOMINF_hvm_guest: u32 = 0b10;
